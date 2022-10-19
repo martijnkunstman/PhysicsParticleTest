@@ -1,3 +1,4 @@
+Math.seedrandom(0);
 let can = document.getElementById('main');
 let con = can.getContext('2d');
 const scale = 1;
@@ -8,48 +9,39 @@ function draw (x, y, color) {
 can.width = window.innerWidth*scale;
 can.height = window.innerHeight*scale;
 
-let yellow = addParticles(0);
-let red = addParticles(300);
-let green = addParticles(0);
-let blue = addParticles(0);
-let white = addParticles(600, 0.1);
+let yellow = addParticles(800);
+let red = addParticles(500);
+let green = addParticles(2000);
 
 function update () {
-    // behaviour(red, red, -1);
-    // behaviour(blue, blue, -1);
-    // behaviour(white, white, 2, 40);
-    // behaviour(white, red, 2);
-    // behaviour(white, blue, 2);
-    // behaviour(blue, white, -0.01);
-    // behaviour(red, white, -0.01);
-    // behaviour(yellow, red, -1);
-    // behaviour(yellow, blue, -1);
-    // behaviour(yellow, yellow, -1);
-    behaviour(red, red, -1);
-    behaviour(white, red, -1);
-    behaviour(red, white, 1);
-    behaviour(white, white, 2);
+    behaviour(yellow, yellow, -0.5,200);
+    behaviour(yellow, red, -0.5,100);
+    behaviour(yellow, green, 0.8);
+
+    behaviour(red, yellow, -0.8);
+    behaviour(red, red, -0.8);
+    behaviour(red, green, -1.2);
+    
+    behaviour(green, yellow, 0.3);
+    behaviour(green, red, -0.5);
+    behaviour(green, green, 0.01);  
+    
+
+    con.fillStyle = 'rgba(0, 0, 0, 0.05)';
+    con.fillRect(0, 0, window.innerWidth*scale, window.innerHeight*scale);
 
 
 
-    can.width = window.innerWidth*scale;
-    can.height = window.innerHeight*scale;
-    con.clearRect(0, 0, can.width, can.height);
+    for (let i in yellow) {
+        draw(yellow[i].x, yellow[i].y, 'yellow')
+    }
     for (let i in red) {
         draw(red[i].x, red[i].y, 'red')
-    }
-    for (let i in blue) {
-        draw(blue[i].x, blue[i].y, 'blue')
-    }
-    for (let i in white) {
-        draw(white[i].x, white[i].y, 'white')
     }
     for (let i in green) {
         draw(green[i].x, green[i].y, 'green')
     }
-    for (let i in yellow) {
-        draw(yellow[i].x, yellow[i].y, 'yellow')
-    }
+
     requestAnimationFrame(update);
 }
 update();
