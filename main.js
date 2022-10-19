@@ -1,21 +1,18 @@
 function RNG(seed) {
-    var m = 2**35 - 31
+    var m = 2 ** 35 - 31
     var a = 185852
     var s = seed % m
     return function () {
         return (s = s * a % m) / m
     }
 }
-
 Math.random = RNG(1);
-console.log(Math.random() );
-console.log(Math.random() );
 //
 let can = document.getElementById('main');
 let con = can.getContext('2d');
 
-let width = 1200;
-let height = 600;
+let width = 1000;
+let height = 1000;
 const scale = 1;
 
 function draw(x, y, color) {
@@ -40,24 +37,28 @@ function update() {
     redTemp = [...red];
     greenTemp = [...green];
 
-    behaviour(yellow, yellow, -0.5);
-    behaviour(yellow, red, -0.5);
-    behaviour(yellow, green, 0.8);
+    //yellowTemp = yellow;
+    //redTemp = red;
+    //greenTemp = green;
 
-    behaviour(red, yellow, -0.8);
-    behaviour(red, red, -0.8);
-    behaviour(red, green, 1.2);
+    behaviour(yellow, yellowTemp, -0.5);
+    behaviour(yellow, redTemp, -0.5);
+    behaviour(yellow, greenTemp, 0.8);
 
-    behaviour(green, yellow, 0.3);
-    behaviour(green, red, -0.5);
-    behaviour(green, green, 0.01);
+    behaviour(red, yellowTemp, -0.8);
+    behaviour(red, redTemp, -0.8);
+    behaviour(red, greenTemp, 1.2);
+
+    behaviour(green, yellowTemp, 0.3);
+    behaviour(green, redTemp, -0.5);
+    behaviour(green, greenTemp, 0.01);
 
     con.fillStyle = 'rgba(0, 0, 0, 0.05)';
     con.fillRect(0, 0, window.innerWidth * scale, window.innerHeight * scale);
 
-    yellow = yellowTemp;
-    red = redTemp;
-    green = greenTemp;
+    //yellow = [...yellowTemp];
+    //red = [...redTemp];
+    //green = [...greenTemp];
 
     for (let i in yellow) {
         draw(yellow[i].x, yellow[i].y, 'yellow')
