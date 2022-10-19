@@ -7,6 +7,7 @@ function RNG(seed) {
     }
 }
 Math.random = RNG(1);
+///test
 //
 let can = document.getElementById('main');
 let con = can.getContext('2d');
