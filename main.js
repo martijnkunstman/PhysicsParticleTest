@@ -24,7 +24,7 @@ can.width = width * scale;
 can.height = height * scale;
 
 let yellow = addParticles(400);
-let red = addParticles(200);
+let red = addParticles(400);
 let green = addParticles(1000);
 
 let yellowTemp = [];
@@ -38,28 +38,20 @@ function update() {
     redTemp = [...red];
     greenTemp = [...green];
 
-    //yellowTemp = yellow;
-    //redTemp = red;
-    //greenTemp = green;
-
     behaviour(yellow, yellowTemp, -0.5);
-    behaviour(yellow, redTemp, -0.5);
+    behaviour(yellow, redTemp, -0.2);
     behaviour(yellow, greenTemp, 0.8);
 
-    behaviour(red, yellowTemp, -0.8);
-    behaviour(red, redTemp, -0.8);
+    behaviour(red, yellowTemp, -0.7);
+    behaviour(red, redTemp, -0.9);
     behaviour(red, greenTemp, 1.2);
 
     behaviour(green, yellowTemp, 0.3);
-    behaviour(green, redTemp, -0.5);
-    behaviour(green, greenTemp, 0.01);
+    behaviour(green, redTemp, -0.7);
+    behaviour(green, greenTemp, 0.1);
 
     con.fillStyle = 'rgba(0, 0, 0, 0.05)';
     con.fillRect(0, 0, window.innerWidth * scale, window.innerHeight * scale);
-
-    //yellow = [...yellowTemp];
-    //red = [...redTemp];
-    //green = [...greenTemp];
 
     for (let i in yellow) {
         draw(yellow[i].x, yellow[i].y, 'yellow')
@@ -70,6 +62,10 @@ function update() {
     for (let i in green) {
         draw(green[i].x, green[i].y, 'green')
     }
+
+    yellow = [...yellowTemp];
+    red = [...redTemp];
+    green = [...greenTemp];
 
     requestAnimationFrame(update);
 }
